@@ -19,3 +19,12 @@ Route::middleware(['auth', \App\Http\Middleware\EnsureOrganizationContext::class
     Route::post('/expenses/{id}/reject', [ExpenseController::class, 'reject']);
     Route::post('/expenses/{id}/complete', [ExpenseController::class, 'complete']);
 });
+
+Route::middleware(['auth', \App\Http\Middleware\EnsureOrganizationContext::class])->group(function () {
+    Route::post('/projects', [\App\Http\Controllers\Project\ProjectController::class, 'store']);
+    Route::get('/projects', [\App\Http\Controllers\Project\ProjectController::class, 'index']);
+    Route::post('/reports', [\App\Http\Controllers\Report\ReportController::class, 'store']);
+    Route::get('/audit-logs', [\App\Http\Controllers\Report\ReportController::class, 'auditLogs']);
+    Route::get('/notifications', [\App\Http\Controllers\Notification\NotificationController::class, 'index']);
+    Route::patch('/notifications/{id}/read', [\App\Http\Controllers\Notification\NotificationController::class, 'markRead']);
+});
