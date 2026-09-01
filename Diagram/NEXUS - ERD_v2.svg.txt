@@ -1,0 +1,138 @@
+﻿NEXUS - ERD
+User
+user_id : UUID &#171;PK&#187;
+name : VARCHAR(100) &#171;NOT NULL&#187;
+email : VARCHAR(255) &#171;NOT NULL, UNIQUE&#187;
+password_hash : VARCHAR(255) &#171;NOT NULL&#187;
+created_at : TIMESTAMP &#171;NOT NULL&#187;
+updated_at : TIMESTAMP &#171;NOT NULL&#187;
+Organization
+organization_id : UUID &#171;PK&#187;
+name : VARCHAR(100) &#171;NOT NULL&#187;
+created_at : TIMESTAMP &#171;NOT NULL&#187;
+updated_at : TIMESTAMP &#171;NOT NULL&#187;
+Role
+role_id : UUID &#171;PK&#187;
+name : VARCHAR(50) &#171;NOT NULL, UNIQUE&#187;
+Permission
+permission_id : UUID &#171;PK&#187;
+name : VARCHAR(100) &#171;NOT NULL, UNIQUE&#187;
+Membership
+membership_id : UUID &#171;PK&#187;
+user_id : UUID &#171;NOT NULL, FK&#187;
+organization_id : UUID &#171;NOT NULL, FK&#187;
+role_id : UUID &#171;NOT NULL, FK&#187;
+joined_at : TIMESTAMP &#171;NOT NULL&#187;
+status : VARCHAR(20) &#171;NOT NULL&#187;
+created_at : TIMESTAMP &#171;NOT NULL&#187;
+UNIQUE(user_id, organization_id)
+UNIQUE(membership_id, organization_id)
+Role_Permission
+role_id : UUID &#171;PK, FK&#187;
+permission_id : UUID &#171;PK, FK&#187;
+Project
+project_id : UUID &#171;PK&#187;
+organization_id : UUID &#171;NOT NULL, FK&#187;
+name : VARCHAR(100) &#171;NOT NULL&#187;
+description : TEXT
+status : VARCHAR(20) &#171;NOT NULL&#187;
+start_date : DATE
+end_date : DATE
+created_at : TIMESTAMP &#171;NOT NULL&#187;
+updated_at : TIMESTAMP &#171;NOT NULL&#187;
+UNIQUE(project_id, organization_id)
+UNIQUE(organization_id, name)
+Project_Membership
+project_id : UUID &#171;PK, FK&#187;
+membership_id : UUID &#171;PK, FK&#187;
+organization_id : UUID &#171;NOT NULL, FK&#187;
+Task
+task_id : UUID &#171;PK&#187;
+project_id : UUID &#171;NOT NULL, FK&#187;
+organization_id : UUID &#171;NOT NULL, FK&#187;
+title : VARCHAR(200) &#171;NOT NULL&#187;
+description : TEXT
+status : VARCHAR(20) &#171;NOT NULL&#187;
+priority : VARCHAR(10) &#171;NOT NULL&#187;
+due_date : DATE
+assignee_membership_id : UUID &#171;NULLABLE, FK&#187;
+created_at : TIMESTAMP &#171;NOT NULL&#187;
+updated_at : TIMESTAMP &#171;NOT NULL&#187;
+Expense
+expense_id : UUID &#171;PK&#187;
+organization_id : UUID &#171;NOT NULL, FK&#187;
+&#160;
+creator_membership_id : UUID &#171;NOT NULL, FK&#187;
+reviewer_membership_id : UUID &#171;NULLABLE, FK&#187;
+approver_membership_id : UUID &#171;NULLABLE, FK&#187;
+&#160;
+description : TEXT &#171;NOT NULL&#187;
+amount : DECIMAL(12,2) &#171;NOT NULL&#187;
+status : VARCHAR(20) &#171;NOT NULL&#187;
+created_at : TIMESTAMP &#171;NOT NULL&#187;
+Report
+report_id : UUID &#171;PK&#187;
+organization_id : UUID &#171;NOT NULL, FK&#187;
+type : VARCHAR(50) &#171;NOT NULL&#187;
+period : VARCHAR(50) &#171;NOT NULL&#187;
+generated_at : TIMESTAMP &#171;NOT NULL&#187;
+created_at : TIMESTAMP &#171;NOT NULL&#187;
+AuditLog
+audit_log_id : UUID &#171;PK&#187;
+organization_id : UUID &#171;NOT NULL, FK&#187;
+membership_id : UUID &#171;NOT NULL, FK&#187;
+action : VARCHAR(100) &#171;NOT NULL&#187;
+entity_type : VARCHAR(50) &#171;NOT NULL&#187;
+entity_id : UUID &#171;NOT NULL&#187;
+timestamp : TIMESTAMP &#171;NOT NULL&#187;
+Notification
+notification_id : UUID &#171;PK&#187;
+organization_id : UUID &#171;NOT NULL, FK&#187;
+membership_id : UUID &#171;NOT NULL, FK&#187;
+title : VARCHAR(200) &#171;NOT NULL&#187;
+message : TEXT &#171;NOT NULL&#187;
+is_read : BOOLEAN &#171;NOT NULL, DEFAULT FALSE&#187;
+created_at : TIMESTAMP &#171;NOT NULL&#187;
+Tenant boundary:
+(user_id, organization_id)
+must be unique.
+&#160;
+membership_id + organization_id
+provides composite tenant-safe
+references for downstream tables.
+Prevents assigning a membership
+from Organization A to a project
+belonging to Organization B.
+&#160;
+FK:
+(membership_id, organization_id)
+Task belongs to exactly one
+organization through Project.
+&#160;
+assignee_membership_id must refer
+to a membership in the same
+organization and project scope.
+Creator, reviewer and approver
+must belong to the same
+organization as the expense.
+&#160;
+Prevents cross-tenant approval.
+has
+contains
+assigned
+has
+granted through
+owns
+has members
+participates in
+contains
+assigned to
+owns
+creates
+reviews
+approves
+generates
+records
+performs
+owns
+receives

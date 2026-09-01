@@ -1,0 +1,93 @@
+﻿NEXUS - Sequence Diagram
+Expense Management &amp; Approval Workflow
+Member
+Member
+Reviewer
+Reviewer
+Approver
+Approver
+NEXUS System
+NEXUS System
+Database
+Database
+Create &amp; Submit Expense
+1
+Create Expense(description, amount)
+2
+Validate expense data
+alt
+[data tidak valid]
+3
+Display validation error
+[data valid]
+4
+INSERT expense (status = PENDING)
+5
+INSERT audit_log (action = "CREATE_EXPENSE")
+6
+Expense created (PENDING)
+7
+Submit Expense
+8
+UPDATE expense (forwarded for approval)
+9
+INSERT notification (target = Reviewer)
+10
+Notify: expense pending review
+Review Expense
+11
+Review Expense
+12
+Evaluate acceptance for approval
+alt
+[expense diterima untuk approval]
+13
+UPDATE expense (reviewer_membership_id)
+14
+INSERT audit_log (action = "REVIEW_EXPENSE")
+15
+INSERT notification (target = Approver)
+16
+Notify: expense ready for approval
+[expense ditolak oleh Reviewer]
+17
+UPDATE expense (status = REJECTED)
+18
+INSERT audit_log (action = "REJECT_EXPENSE")
+19
+INSERT notification (target = Member)
+20
+Notify: expense rejected
+Approve / Reject Expense
+21
+Approve or Reject Expense
+alt
+[Approver menyetujui]
+22
+UPDATE expense (status = APPROVED)
+23
+INSERT audit_log (action = "APPROVE_EXPENSE")
+24
+INSERT notification (target = Member)
+25
+Notify: expense approved
+Complete Expense
+26
+Complete Expense (process payment)
+27
+UPDATE expense (status = PAID)
+28
+INSERT audit_log (action = "COMPLETE_EXPENSE")
+29
+INSERT notification (target = Member)
+30
+Notify: payment completed
+[Approver menolak]
+31
+UPDATE expense (status = REJECTED)
+32
+INSERT audit_log (action = "REJECT_EXPENSE")
+33
+INSERT notification (target = Member)
+34
+Notify: expense rejected

@@ -1,0 +1,17 @@
+﻿NEXUS - Activity 05.5
+NEXUS
+Detect notification-triggering event
+Notification required?
+Yes
+No
+Create notification
+Associate notification with membership
+User
+Receive notification
+Open notification
+NEXUS
+Mark notification as read
+User
+Continue operation
+Continue current workflow
+Notification Lifecycle

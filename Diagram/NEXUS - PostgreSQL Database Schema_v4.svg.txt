@@ -1,0 +1,170 @@
+﻿NEXUS - PostgreSQL Database Schema
+membership_status
+invited
+active
+inactive
+project_status
+active
+completed
+archived
+task_status
+open
+in_progress
+done
+cancelled
+task_priority
+low
+medium
+high
+expense_status
+pending
+approved
+rejected
+paid
+users
+user_id : uuid &#171;PK&#187;
+name : varchar(100) &#171;NOT NULL&#187;
+email : varchar(255) &#171;NOT NULL, UNIQUE&#187;
+password_hash : varchar(255) &#171;NOT NULL&#187;
+created_at : timestamptz &#171;NOT NULL&#187;
+updated_at : timestamptz &#171;NOT NULL&#187;
+roles
+role_id : uuid &#171;PK&#187;
+name : varchar(50) &#171;NOT NULL, UNIQUE&#187;
+permissions
+permission_id : uuid &#171;PK&#187;
+name : varchar(100) &#171;NOT NULL, UNIQUE&#187;
+role_permissions
+role_id : uuid &#171;PK, FK&#187;
+permission_id : uuid &#171;PK, FK&#187;
+organizations
+organization_id : uuid &#171;PK&#187;
+name : varchar(100) &#171;NOT NULL&#187;
+created_at : timestamptz &#171;NOT NULL&#187;
+updated_at : timestamptz &#171;NOT NULL&#187;
+UNIQUE(name)
+memberships
+membership_id : uuid &#171;PK&#187;
+user_id : uuid &#171;FK, NOT NULL&#187;
+organization_id : uuid &#171;FK, NOT NULL&#187;
+role_id : uuid &#171;FK, NOT NULL&#187;
+joined_at : timestamptz &#171;NOT NULL&#187;
+status : membership_status &#171;NOT NULL&#187;
+created_at : timestamptz &#171;NOT NULL&#187;
+UNIQUE(user_id, organization_id)
+UNIQUE(membership_id, organization_id)
+projects
+project_id : uuid &#171;PK&#187;
+organization_id : uuid &#171;FK, NOT NULL&#187;
+name : varchar(100) &#171;NOT NULL&#187;
+description : text
+status : project_status &#171;NOT NULL&#187;
+start_date : date
+end_date : date
+created_at : timestamptz &#171;NOT NULL&#187;
+updated_at : timestamptz &#171;NOT NULL&#187;
+UNIQUE(organization_id, name)
+UNIQUE(project_id, organization_id)
+project_memberships
+project_id : uuid &#171;PK, FK&#187;
+membership_id : uuid &#171;PK, FK&#187;
+organization_id : uuid &#171;FK, NOT NULL&#187;
+FK(project_id, organization_id)
+FK(membership_id, organization_id)
+tasks
+task_id : uuid &#171;PK&#187;
+project_id : uuid &#171;FK, NOT NULL&#187;
+organization_id : uuid &#171;FK, NOT NULL&#187;
+assignee_membership_id : uuid &#171;FK, NULLABLE&#187;
+title : varchar(200) &#171;NOT NULL&#187;
+description : text
+status : task_status &#171;NOT NULL&#187;
+priority : task_priority &#171;NOT NULL&#187;
+due_date : date
+created_at : timestamptz &#171;NOT NULL&#187;
+updated_at : timestamptz &#171;NOT NULL&#187;
+FK(project_id, organization_id)
+FK(assignee_membership_id, organization_id)
+expenses
+expense_id : uuid &#171;PK&#187;
+organization_id : uuid &#171;FK, NOT NULL&#187;
+creator_membership_id : uuid &#171;FK, NOT NULL&#187;
+reviewer_membership_id : uuid &#171;FK, NULLABLE&#187;
+approver_membership_id : uuid &#171;FK, NULLABLE&#187;
+description : text &#171;NOT NULL&#187;
+amount : numeric(12,2) &#171;NOT NULL&#187;
+status : expense_status &#171;NOT NULL&#187;
+created_at : timestamptz &#171;NOT NULL&#187;
+FK(creator_membership_id, organization_id)
+FK(reviewer_membership_id, organization_id)
+FK(approver_membership_id, organization_id)
+reports
+report_id : uuid &#171;PK&#187;
+organization_id : uuid &#171;FK, NOT NULL&#187;
+type : varchar(50) &#171;NOT NULL&#187;
+period : varchar(50) &#171;NOT NULL&#187;
+generated_at : timestamptz &#171;NOT NULL&#187;
+created_at : timestamptz &#171;NOT NULL&#187;
+audit_logs
+audit_log_id : uuid &#171;PK&#187;
+organization_id : uuid &#171;FK, NOT NULL&#187;
+membership_id : uuid &#171;FK, NOT NULL&#187;
+action : varchar(100) &#171;NOT NULL&#187;
+entity_type : varchar(50) &#171;NOT NULL&#187;
+entity_id : uuid &#171;NOT NULL&#187;
+timestamp : timestamptz &#171;NOT NULL&#187;
+FK(membership_id, organization_id)
+notifications
+notification_id : uuid &#171;PK&#187;
+organization_id : uuid &#171;FK, NOT NULL&#187;
+membership_id : uuid &#171;FK, NOT NULL&#187;
+title : varchar(200) &#171;NOT NULL&#187;
+message : text &#171;NOT NULL&#187;
+is_read : boolean &#171;NOT NULL, DEFAULT false&#187;
+created_at : timestamptz &#171;NOT NULL&#187;
+FK(membership_id, organization_id)
+membership_id is globally unique.
+&#160;
+Tenant-sensitive references MUST use:
+(membership_id, organization_id)
+&#160;
+This prevents a membership from
+being referenced across organizations.
+project_id is globally unique.
+&#160;
+Child tables use:
+(project_id, organization_id)
+&#160;
+to enforce same-tenant references.
+M:N relationship between projects
+and memberships.
+&#160;
+organization_id is deliberately retained
+as a tenant boundary and must match
+both referenced entities.
+All creator/reviewer/approver references
+are tenant-scoped through:
+&#160;
+(membership_id, organization_id)
+&#160;
+This prevents cross-organization
+approval/review relationships.
+has
+contains
+assigned
+grants
+defines
+owns
+has
+participates
+contains
+assigned
+owns
+creates
+reviews
+approves
+generates
+records
+performs
+owns
+receives

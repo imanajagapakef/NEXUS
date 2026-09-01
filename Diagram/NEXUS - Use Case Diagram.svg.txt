@@ -1,0 +1,36 @@
+﻿NEXUS - Use Case Diagram
+NEXUS
+Multi-Tenant Business Operations Platform
+Organization &amp; Access
+Reporting &amp; Audit
+Expense Management
+Project &amp; Task Management
+Notifications
+Consume REST API
+Create Organization
+Manage Roles &amp; Permissions
+Manage Members
+Authenticate
+Switch Organization
+View Audit Logs
+Generate Reports
+View Reports
+Review Expense
+Approve Expense
+Reject Expense
+Complete Expense
+Create Expense
+Submit Expense
+Assign Tasks
+Manage Projects
+Manage Tasks
+View Projects
+View Tasks
+View Notifications
+Owner
+Admin
+Manager
+Staff
+Viewer
+Organization Member
+API Client

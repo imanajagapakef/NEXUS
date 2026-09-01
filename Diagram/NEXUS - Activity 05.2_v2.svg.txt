@@ -1,0 +1,54 @@
+﻿NEXUS - Activity 05.2
+Open project workspace
+View projects
+Select action?
+Manage project
+Manage task
+Open project
+View project tasks
+Create / Update
+Select task action?
+Assign task
+Select task action?
+Update task status
+Update task status
+Create or update project
+Select project member
+Assign task
+Validate organization membership
+Validate authorization
+Authorized?
+Yes
+No
+Save project changes
+Record audit event
+Deny operation
+Validate project membership
+Validate authorization
+Authorized?
+Yes
+No
+Save task changes
+Record audit event
+Deny operation
+Validate assignee membership
+Valid assignee?
+Yes
+No
+Save task assignment
+Create notification
+Record audit event
+Reject assignment
+Validate authorization
+Authorized?
+Yes
+No
+Save task status
+Record audit event
+Deny operation
+Create or update task
+User
+Project Manager
+NEXUS
+Project Manager / Member
+Project &amp; Task Management

@@ -1,0 +1,72 @@
+﻿Activity Diagram Utama - NEXUS
+Authentication
+User membuka aplikasi NEXUS
+Input email dan password
+Kredensial valid?
+Ya
+Tidak
+Membuat sesi autentikasi
+Menampilkan pesan kesalahan
+Organization &amp; Access
+Memilih Organization
+Memvalidasi membership user
+Membership aktif?
+Ya
+Tidak
+Memuat Role &amp; Permission
+Menampilkan akses ditolak
+Authorized?
+Ya
+Tidak
+Memilih operasi
+Menampilkan akses ditolak
+System Operation
+Organization Management
+Operasi?
+Organization Management
+Mengelola Organization
+Mengelola Membership
+Mengatur Role &amp; Permission
+Project &amp; Task Management
+Project &amp; Task Management
+Mengelola Project
+Mengelola Task
+Mengatur Assignment
+Memperbarui Status Task
+Expense Management
+Expense Management
+Membuat Expense
+Mengirim Expense
+Menetapkan Status PENDING
+Melakukan Review Expense
+Expense disetujui?
+Ya
+Tidak
+Menetapkan Status APPROVED
+Memproses Pembayaran
+Menetapkan Status PAID
+Menetapkan Status REJECTED
+Reporting
+Audit
+Reporting
+Memilih periode dan parameter laporan
+Mengambil data sistem
+Menghasilkan laporan
+Menampilkan laporan
+Audit
+Meminta Audit Log
+Mengambil Audit Log
+Menelusuri aktivitas sistem
+Post-Operation Processing
+Audit Logging
+Mencatat aktivitas penting ke Audit Log
+Ya
+Operasi perlu dicatat?
+Notification
+Membuat Notification
+Mengaitkan Notification dengan Membership
+Menyediakan Notification kepada User
+User membaca Notification
+Ya
+Notification diperlukan?
+Operation Complete

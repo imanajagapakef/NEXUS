@@ -1,0 +1,59 @@
+﻿Activity Diagram 5.1. | Authentication &amp; Organization Access
+Open NEXUS
+Enter email and password
+Select organization
+Enter email and password
+Select organization
+Yes
+Retry login?
+No
+Validate credentials
+Credentials valid?
+Yes
+No
+Create authenticated session
+Load user's memberships
+Membership available?
+Yes
+No
+Validate selected membership
+Membership active?
+Yes
+No
+Load membership role
+Load role permissions
+Access permitted?
+Yes
+No
+Grant organization access
+Open organization workspace
+Display permission denied
+Display inactive membership
+Display no organization available
+Display invalid credentials
+Validate credentials
+Credentials valid?
+Yes
+No
+Create authenticated session
+Load user's memberships
+Membership available?
+Yes
+No
+Validate selected membership
+Membership active?
+Yes
+No
+Load membership role
+Load role permissions
+Access permitted?
+Yes
+No
+Grant organization access
+Open organization workspace
+Display permission denied
+Display inactive membership
+Display no organization available
+Display invalid credentials
+User
+NEXUS

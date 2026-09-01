@@ -1,0 +1,40 @@
+﻿NEXUS - Activity 05.3
+Create expense
+Enter description and amount
+Submit expense
+Validate expense data
+Valid expense?
+Yes
+No
+Set status to PENDING
+Record audit event
+Display validation error
+Forward expense for approval
+Set status to APPROVED
+Record audit event
+Create approval notification
+Set status to PAID
+Record audit event
+Create completion notification
+Set status to REJECTED
+Record audit event
+Create rejection notification
+Set status to REJECTED
+Record audit event
+Create rejection notification
+Review expense
+Expense accepted for approval?
+Yes
+No
+Review expense
+Approve or reject expense
+Expense approved?
+Yes
+No
+Complete expense
+Member
+NEXUS
+Reviewer
+Approver
+Authorized Member
+Expense Management &amp; Approval Workflow

@@ -1,0 +1,36 @@
+﻿NEXUS - Activity 05.4
+Authorized User
+Open administration area
+Choose Reporting or Audit
+Reporting?
+Yes
+Audit
+Authorized User
+Select report type
+Select reporting period
+Request report
+NEXUS
+Validate organization context
+Validate authorization
+Authorized?
+Yes
+No
+Generate report
+Store report metadata
+Record audit event
+Deny report access
+Authorized User
+View generated report
+Authorized User
+Request audit logs
+NEXUS
+Validate organization context
+Validate authorization
+Authorized?
+Yes
+No
+Retrieve organization audit logs
+Deny audit access
+Authorized User
+View audit logs
+Reporting &amp; Audit
