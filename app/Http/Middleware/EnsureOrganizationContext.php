@@ -17,8 +17,11 @@ class EnsureOrganizationContext
         $user = $request->user();
         if (!$user) return $next($request);
 
-        $orgId = $request->session()->get(config('nexus.tenant.session_key'))
-            ?? $request->header(config('nexus.tenant.header'));
+        $orgId = null;
+        if ($request->hasSession()) {
+            $orgId = $request->session()->get(config('nexus.tenant.session_key'));
+        }
+        $orgId = $orgId ?? $request->header(config('nexus.tenant.header'));
 
         if (!$orgId) return $next($request);
 
